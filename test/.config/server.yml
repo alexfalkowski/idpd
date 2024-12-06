@@ -14,6 +14,9 @@ telemetry:
   tracer:
     kind: otlp
     url: http://localhost:4318/v1/traces
+token:
+  kind: key
+  key: secrets/token
 transport:
   http:
     address: :11000
@@ -22,12 +25,4 @@ transport:
       backoff: 100ms
       timeout: 10s
     timeout: 5s
-    user_agent: "Example-server/1.0 HTTP/1.0"
-  grpc:
-    address: :12000
-    retry:
-      attempts: 3
-      backoff: 100ms
-      timeout: 10s
-    timeout: 5s
-    user_agent: "Example-server/1.0 gRPC/1.0"
+    user_agent: "IDP/1.0 HTTP/1.0"

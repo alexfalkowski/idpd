@@ -4,7 +4,7 @@ require 'securerandom'
 require 'yaml'
 require 'base64'
 
-require 'grpc/health/v1/health_services_pb'
+require 'idpd/v1/http'
 
 module Idpd
   class << self
@@ -16,15 +16,16 @@ module Idpd
       @server_config ||= Nonnative.configurations('.config/server.yml')
     end
 
-    def health_grpc
-      @health_grpc ||= Grpc::Health::V1::Health::Stub.new('localhost:12000', :this_channel_is_insecure, channel_args: Idpd.user_agent)
-    end
-
-    def user_agent
-      @user_agent ||= Nonnative::Header.grpc_user_agent('Idpd-ruby-client/1.0 gRPC/1.0')
+    def token
+      Nonnative::Header.auth_bearer(Base64.decode64(File.read('secrets/token')))
     end
   end
 
   module V1
+    class << self
+      def server
+        @server ||= Idpd::V1::HTTP.new('http://localhost:11000')
+      end
+    end
   end
 end
