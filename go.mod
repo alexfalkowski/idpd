@@ -1,4 +1,4 @@
-module github.com/alexfalkowski/go-service-template
+module github.com/alexfalkowski/idpd
 
 go 1.23
 
