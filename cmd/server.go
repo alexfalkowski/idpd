@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"github.com/alexfalkowski/go-service-template/config"
-	"github.com/alexfalkowski/go-service-template/server/health"
 	"github.com/alexfalkowski/go-service/compress"
 	"github.com/alexfalkowski/go-service/debug"
 	"github.com/alexfalkowski/go-service/encoding"
@@ -11,6 +9,8 @@ import (
 	"github.com/alexfalkowski/go-service/sync"
 	"github.com/alexfalkowski/go-service/telemetry"
 	"github.com/alexfalkowski/go-service/transport"
+	"github.com/alexfalkowski/idpd/config"
+	"github.com/alexfalkowski/idpd/server/health"
 	"go.uber.org/fx"
 )
 
