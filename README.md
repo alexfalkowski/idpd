@@ -137,6 +137,45 @@ Example response:
 }
 ```
 
+### Delete a Pipeline
+
+This endpoint deletes a pipeline by an ID.
+
+```plaintext
+DELETE /pipelines/{id}
+```
+Example request:
+
+```shell
+curl --header "Authorization: Bearer <token>"  --header "Content-Type: application/json" --request DELETE --url "http://localhost:11000/pipelines/1"
+
+Example response:
+
+```json
+{
+   "meta":{
+      "ipAddr":"127.0.0.1",
+      "ipAddrKind":"remote",
+      "requestId":"ae429023-e070-433b-846c-47cf8a209b42",
+      "traceId":"893bf1648d88427b14a9ebd8f8f73437",
+      "userAgent":"IDP-ruby-client/1.0 HTTP/1.0"
+   },
+   "pipeline":{
+      "id":1,
+      "name":"test",
+      "jobs":[
+         {
+            "name":"test",
+            "steps":[
+               "test",
+               "test2"
+            ]
+         }
+      ]
+   }
+}
+```
+
 ## Health
 
 The system defines a way to monitor all of it's dependencies.
