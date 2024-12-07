@@ -50,6 +50,15 @@ func (s *Service) Update(id ID, p *Pipeline) (*Pipeline, error) {
 	return s.repo.Update(id, p)
 }
 
+// Update an existing pipeline.
+func (s *Service) Delete(id ID) (*Pipeline, error) {
+	if err := id.Valid(); err != nil {
+		return nil, err
+	}
+
+	return s.repo.Delete(id)
+}
+
 // ID from a string.
 func (s *Service) ID(id string) ID {
 	i, _ := strconv.ParseUint(id, 10, 64)

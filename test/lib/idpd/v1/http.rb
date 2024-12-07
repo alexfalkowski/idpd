@@ -14,6 +14,10 @@ module Idpd
       def update_pipeline(id, params, opts = {})
         put("/pipeline/#{id}", params.to_json, opts)
       end
+
+      def delete_pipeline(id, opts = {})
+        delete("/pipeline/#{id}", opts)
+      end
     end
   end
 end
