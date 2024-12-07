@@ -10,10 +10,10 @@ import (
 	"github.com/alexfalkowski/go-service/sync"
 	"github.com/alexfalkowski/go-service/telemetry"
 	"github.com/alexfalkowski/go-service/transport"
+	"github.com/alexfalkowski/idpd/api"
 	"github.com/alexfalkowski/idpd/config"
+	"github.com/alexfalkowski/idpd/health"
 	"github.com/alexfalkowski/idpd/pipeline"
-	"github.com/alexfalkowski/idpd/server/health"
-	v1 "github.com/alexfalkowski/idpd/server/v1"
 	"github.com/alexfalkowski/idpd/token"
 	"go.uber.org/fx"
 )
@@ -25,5 +25,5 @@ var ServerOptions = []fx.Option{
 	telemetry.Module, transport.Module,
 	crypto.Module, token.Module,
 	config.Module, health.Module,
-	pipeline.Module, v1.Module, Module,
+	pipeline.Module, api.Module, Module,
 }

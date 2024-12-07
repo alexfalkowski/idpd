@@ -1,4 +1,4 @@
-package v1
+package api
 
 import (
 	"context"
@@ -13,7 +13,7 @@ import (
 
 // Register routes.
 func Register(service *Service) {
-	rest.Post("/v1/pipeline", service.createPipeline)
+	rest.Post("/pipeline", service.createPipeline)
 }
 
 // Service for v1.
