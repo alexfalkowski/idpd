@@ -18,7 +18,7 @@ The server is composed of [RESTful](https://aws.amazon.com/what-is/restful-api/)
 
 Each of the endpoints is documented using the following [style guide](https://docs.gitlab.com/ee/development/documentation/restful_api_styleguide.html).
 
-### Create Pipeline
+### Create a pipeline
 
 This endpoint takes pipeline definition and persists it.
 
@@ -58,7 +58,7 @@ Example response:
 }
 ```
 
-### Get Pipeline
+### Get a pipeline
 
 This endpoint gets a pipeline by an ID.
 
@@ -70,6 +70,45 @@ Example request:
 ```shell
 curl --header "Authorization: Bearer <token>"  --header "Content-Type: application/json" --request GET --url "http://localhost:11000/pipelines/1"
 ```
+
+Example response:
+
+```json
+{
+   "meta":{
+      "ipAddr":"127.0.0.1",
+      "ipAddrKind":"remote",
+      "requestId":"ae429023-e070-433b-846c-47cf8a209b42",
+      "traceId":"893bf1648d88427b14a9ebd8f8f73437",
+      "userAgent":"IDP-ruby-client/1.0 HTTP/1.0"
+   },
+   "pipeline":{
+      "id":1,
+      "name":"test",
+      "jobs":[
+         {
+            "name":"test",
+            "steps":[
+               "test",
+               "test2"
+            ]
+         }
+      ]
+   }
+}
+```
+
+### Update a Pipeline
+
+This endpoint updates a pipeline by an ID.
+
+```plaintext
+GET /pipelines/{id}
+```
+Example request:
+
+```shell
+curl --header "Authorization: Bearer <token>"  --header "Content-Type: application/json" --request PUT --data '{ "pipeline": {"name":"test","jobs":[{"name":"test","steps":["test","test2"]}]}' --url "http://localhost:11000/pipelines/1"
 
 Example response:
 
