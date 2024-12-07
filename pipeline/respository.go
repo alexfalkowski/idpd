@@ -1,6 +1,7 @@
 package pipeline
 
 import (
+	"slices"
 	"sync"
 )
 
@@ -15,6 +16,9 @@ type (
 
 		// Update a pipeline.
 		Update(id ID, p *Pipeline) (*Pipeline, error)
+
+		// Delete a pipeline.
+		Delete(id ID) (*Pipeline, error)
 	}
 
 	// InMemoryRepository for pipeline.
@@ -39,13 +43,12 @@ func (r *InMemoryRepository) Get(id ID) (*Pipeline, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	for _, p := range r.pipelines {
-		if p.ID == id {
-			return p, nil
-		}
+	i, err := r.pipeline(id)
+	if err != nil {
+		return nil, err
 	}
 
-	return nil, ErrPipelineNotFound
+	return r.pipelines[i], nil
 }
 
 // Create a pipeline and set the identifier.
@@ -66,13 +69,37 @@ func (r *InMemoryRepository) Update(id ID, pipeline *Pipeline) (*Pipeline, error
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	for _, p := range r.pipelines {
-		if p.ID == id {
-			p = pipeline
-
-			return p, nil
-		}
+	i, err := r.pipeline(id)
+	if err != nil {
+		return nil, err
 	}
 
-	return nil, ErrPipelineNotFound
+	r.pipelines[i] = pipeline
+
+	return pipeline, nil
+}
+
+// Delete a pipeline.
+func (r *InMemoryRepository) Delete(id ID) (*Pipeline, error) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	i, err := r.pipeline(id)
+	if err != nil {
+		return nil, err
+	}
+
+	p := r.pipelines[i]
+	r.pipelines = slices.Delete(r.pipelines, i, i+1)
+
+	return p, nil
+}
+
+func (r *InMemoryRepository) pipeline(id ID) (int, error) {
+	i := slices.IndexFunc(r.pipelines, func(p *Pipeline) bool { return p.ID == id })
+	if i == -1 {
+		return 0, ErrPipelineNotFound
+	}
+
+	return i, nil
 }

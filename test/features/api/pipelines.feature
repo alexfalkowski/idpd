@@ -35,7 +35,7 @@ Feature: Pipelines
 
   Scenario: Update a pipeline
     Given we create a simple pipeline
-    When we get the update the simple pipeline
+    When we update the simple pipeline
     Then we should have an updated simple pipeline
 
   Scenario: Update a nonexistent pipeline
@@ -48,4 +48,17 @@ Feature: Pipelines
 
   Scenario: Update pipeline by invalid id
     When we try to update with an invalid id
+    Then we should have bad request
+
+  Scenario: Delete a pipeline
+    Given we create a simple pipeline
+    When we delete the simple pipeline
+    Then we should have deleted simple pipeline
+
+  Scenario: Delete a nonexistent pipeline
+    When we try to delete an nonexistent pipeline
+    Then we should have a not found request
+
+  Scenario: Delete pipeline by invalid id
+    When we try to delete with an invalid id
     Then we should have bad request
