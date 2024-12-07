@@ -56,7 +56,7 @@ type (
 	Pipeline struct {
 		Name string
 		Jobs []*Job
-		ID   uint64
+		ID   ID
 	}
 )
 

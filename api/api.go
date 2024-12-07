@@ -30,11 +30,7 @@ func NewService(service *pipeline.Service) *Service {
 
 func (s *Service) getPipeline(ctx context.Context) (any, error) {
 	req := hc.Request(ctx)
-
-	id, err := s.service.ID(req.PathValue("id"))
-	if err != nil {
-		return nil, status.Error(http.StatusBadRequest, err.Error())
-	}
+	id := s.service.ID(req.PathValue("id"))
 
 	p, err := s.service.Get(id)
 	if err != nil {
@@ -73,7 +69,7 @@ func (s *Service) createPipeline(ctx context.Context) (any, error) {
 func (s *Service) toPipeline(pl *Pipeline) *pipeline.Pipeline {
 	p := &pipeline.Pipeline{
 		Name: pl.Name,
-		ID:   pl.ID,
+		ID:   pipeline.ID(pl.ID),
 	}
 
 	p.Jobs = make([]*pipeline.Job, len(pl.Jobs))
@@ -95,7 +91,7 @@ func (s *Service) toPipeline(pl *Pipeline) *pipeline.Pipeline {
 func (s *Service) fromPipeline(pl *pipeline.Pipeline) *Pipeline {
 	p := &Pipeline{
 		Name: pl.Name,
-		ID:   pl.ID,
+		ID:   uint64(pl.ID),
 	}
 
 	p.Jobs = make([]*Job, len(pl.Jobs))

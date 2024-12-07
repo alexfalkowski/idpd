@@ -8,7 +8,7 @@ type (
 	// Repository for pipeline.
 	Repository interface {
 		// Get a pipeline.
-		Get(id uint64) (*Pipeline, error)
+		Get(id ID) (*Pipeline, error)
 
 		// Create a pipeline.
 		Create(p *Pipeline) (*Pipeline, error)
@@ -32,7 +32,7 @@ func NewRepository() Repository {
 }
 
 // Get a pipeline.
-func (r *InMemoryRepository) Get(id uint64) (*Pipeline, error) {
+func (r *InMemoryRepository) Get(id ID) (*Pipeline, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
@@ -53,7 +53,7 @@ func (r *InMemoryRepository) Create(p *Pipeline) (*Pipeline, error) {
 	r.pipelines = append(r.pipelines, p)
 
 	r.counter++
-	p.ID = r.counter
+	p.ID = ID(r.counter)
 
 	return p, nil
 }
