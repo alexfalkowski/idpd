@@ -23,12 +23,12 @@ Each of the endpoints is documented using the following [style guide](https://do
 This endpoint takes pipeline definition and persists it.
 
 ```plaintext
-POST /v1/pipelines
+POST /pipelines
 ```
 Example request:
 
 ```shell
-curl --header "Authorization: Bearer <token>"  --header "Content-Type: application/json" --request POST --data '{ "pipeline": {"name":"test","jobs":[{"name":"test","steps":["test","test2"]}]}' --url "http://localhost:11000/v1/pipelines"
+curl --header "Authorization: Bearer <token>"  --header "Content-Type: application/json" --request POST --data '{ "pipeline": {"name":"test","jobs":[{"name":"test","steps":["test","test2"]}]}' --url "http://localhost:11000/pipelines"
 ```
 
 Example response:
@@ -72,7 +72,17 @@ health:
 
 ## Design
 
-Add anything interesting about the design.
+The design is heavily influenced by [go-service](https://github.com/alexfalkowski/go-service), using the rest package.
+
+The [api](api) package calls the [pipeline](pipeline) package.
+
+### API
+
+This package handles encoding and decoding of the API and making sure the correct status codes are set.
+
+### Pipeline
+
+This package contains all the domain knowledge that deals with pipelines, from validation to execution.
 
 ## Other Systems
 
