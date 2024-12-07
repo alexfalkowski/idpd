@@ -13,6 +13,7 @@ func Register(service *Service) {
 	rest.Post("/pipeline", service.createPipeline)
 	rest.Get("/pipeline/{id}", service.getPipeline)
 	rest.Put("/pipeline/{id}", service.updatePipeline)
+	rest.Delete("/pipeline/{id}", service.deletePipeline)
 }
 
 // Service for v1.
