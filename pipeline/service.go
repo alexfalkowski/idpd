@@ -19,6 +19,7 @@ func NewService(repo Repository) *Service {
 	return &Service{repo: repo}
 }
 
+// Get pipeline by id.
 func (s *Service) Get(id ID) (*Pipeline, error) {
 	if err := id.Valid(); err != nil {
 		return nil, err
@@ -36,7 +37,20 @@ func (s *Service) Create(p *Pipeline) (*Pipeline, error) {
 	return s.repo.Create(p)
 }
 
-// ID from raw id.
+// Update an existing pipeline.
+func (s *Service) Update(id ID, p *Pipeline) (*Pipeline, error) {
+	if err := id.Valid(); err != nil {
+		return nil, err
+	}
+
+	if err := p.Valid(); err != nil {
+		return nil, err
+	}
+
+	return s.repo.Update(id, p)
+}
+
+// ID from a string.
 func (s *Service) ID(id string) ID {
 	i, _ := strconv.ParseUint(id, 10, 64)
 

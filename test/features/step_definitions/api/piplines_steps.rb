@@ -63,7 +63,7 @@ When('we get the created simple pipeline') do
   @response = Idpd::V1.server.get_pipeline(2, opts)
 end
 
-When('we get an nonexistent pipeline') do
+When('we try to get an nonexistent pipeline') do
   opts = {
     headers: {
       request_id: SecureRandom.uuid, user_agent: 'IDP-ruby-client/1.0 HTTP/1.0',
@@ -85,6 +85,70 @@ When('we get an invalid pipeline') do
   }
 
   @response = Idpd::V1.server.get_pipeline(0, opts)
+end
+
+When('we get the update the simple pipeline') do
+  opts = {
+    headers: {
+      request_id: SecureRandom.uuid, user_agent: 'IDP-ruby-client/1.0 HTTP/1.0',
+      content_type: :json, accept: :json
+    }.merge(Idpd.token),
+    read_timeout: 10, open_timeout: 10
+  }
+
+  pipeline = {
+    pipeline: { 'name' => 'update-test', 'jobs' => [{ 'name' => 'test', 'steps' => %w[test test2] }] }
+  }
+
+  @response = Idpd::V1.server.update_pipeline(3, pipeline, opts)
+end
+
+When('we try to update an nonexistent pipeline') do
+  opts = {
+    headers: {
+      request_id: SecureRandom.uuid, user_agent: 'IDP-ruby-client/1.0 HTTP/1.0',
+      content_type: :json, accept: :json
+    }.merge(Idpd.token),
+    read_timeout: 10, open_timeout: 10
+  }
+
+  pipeline = {
+    pipeline: { 'name' => 'update-test', 'jobs' => [{ 'name' => 'test', 'steps' => %w[test test2] }] }
+  }
+
+  @response = Idpd::V1.server.update_pipeline(10, pipeline, opts)
+end
+
+When('we try to update an invalid pipeline') do
+  opts = {
+    headers: {
+      request_id: SecureRandom.uuid, user_agent: 'IDP-ruby-client/1.0 HTTP/1.0',
+      content_type: :json, accept: :json
+    }.merge(Idpd.token),
+    read_timeout: 10, open_timeout: 10
+  }
+
+  pipeline = {
+    pipeline: { 'jobs' => [{ 'name' => 'test', 'steps' => %w[test test2] }] }
+  }
+
+  @response = Idpd::V1.server.update_pipeline(3, pipeline, opts)
+end
+
+When('we try to update with an invalid id') do
+  opts = {
+    headers: {
+      request_id: SecureRandom.uuid, user_agent: 'IDP-ruby-client/1.0 HTTP/1.0',
+      content_type: :json, accept: :json
+    }.merge(Idpd.token),
+    read_timeout: 10, open_timeout: 10
+  }
+
+  pipeline = {
+    pipeline: { 'name' => 'update-test', 'jobs' => [{ 'name' => 'test', 'steps' => %w[test test2] }] }
+  }
+
+  @response = Idpd::V1.server.update_pipeline(0, pipeline, opts)
 end
 
 Then('we should have a created pipeline') do
@@ -111,4 +175,11 @@ end
 
 Then('we should have a not found request') do
   expect(@response.code).to eq(404)
+end
+
+Then('we should have an updated simple pipeline') do
+  expect(@response.code).to eq(200)
+
+  res = JSON.parse(@response.body)
+  expect(res['pipeline']['name']).to eq('update-test')
 end

@@ -10,6 +10,10 @@ module Idpd
       def get_pipeline(id, opts = {})
         get("/pipeline/#{id}", opts)
       end
+
+      def update_pipeline(id, params, opts = {})
+        put("/pipeline/#{id}", params.to_json, opts)
+      end
     end
   end
 end
