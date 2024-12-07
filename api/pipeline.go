@@ -25,4 +25,10 @@ type (
 		Meta     map[string]string `json:"meta,omitempty"`
 		Pipeline *Pipeline         `json:"pipeline,omitempty"`
 	}
+
+	// CreatePipelineResponse a map of meta and the pipeline.
+	GetPipelineResponse struct {
+		Meta     map[string]string `json:"meta,omitempty"`
+		Pipeline *Pipeline         `json:"pipeline,omitempty"`
+	}
 )

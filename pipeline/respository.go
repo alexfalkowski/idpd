@@ -7,6 +7,9 @@ import (
 type (
 	// Repository for pipeline.
 	Repository interface {
+		// Get a pipeline.
+		Get(id uint64) (*Pipeline, error)
+
 		// Create a pipeline.
 		Create(p *Pipeline) (*Pipeline, error)
 	}
@@ -26,6 +29,20 @@ func NewRepository() Repository {
 	}
 
 	return r
+}
+
+// Get a pipeline.
+func (r *InMemoryRepository) Get(id uint64) (*Pipeline, error) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	for _, p := range r.pipelines {
+		if p.ID == id {
+			return p, nil
+		}
+	}
+
+	return nil, ErrPipelineNotFound
 }
 
 // Create a pipeline and set the identifier.

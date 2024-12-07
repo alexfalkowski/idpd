@@ -6,6 +6,10 @@ module Idpd
       def create_pipeline(params, opts = {})
         post('/pipeline', params.to_json, opts)
       end
+
+      def get_pipeline(id, opts = {})
+        get("/pipeline/#{id}", opts)
+      end
     end
   end
 end
