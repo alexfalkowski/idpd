@@ -4,21 +4,59 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/alexfalkowski/idpd.svg)](https://pkg.go.dev/github.com/alexfalkowski/idpd)
 [![Stability: Active](https://masterminds.github.io/stability/active.svg)](https://masterminds.github.io/stability/active.html)
 
-# Service
+# Internal Developer Platform
 
-Make sure you add the name of the service what what it is.
-
-## Background
-
-Add a background.
+An [Internal Developer Platform](https://internaldeveloperplatform.org/what-is-an-internal-developer-platform/) (IDP) is built by a platform team to build golden paths and enable developer self-service.
 
 ### Why a service?
 
-Why is it important to have a service.
+Internal developer portals serve as the interface through which developers can discover and access internal developer platform capabilities.
 
 ## Server
 
-Explain the server side of things.
+The server is composed of [RESTful](https://aws.amazon.com/what-is/restful-api/) API.
+
+Each of the endpoints is documented using the following [style guide](https://docs.gitlab.com/ee/development/documentation/restful_api_styleguide.html).
+
+### Create Pipeline
+
+This endpoint takes pipeline definition and persists it.
+
+```plaintext
+POST /v1/pipelines
+```
+Example request:
+
+```shell
+curl --header "Authorization: Bearer <token>"  --header "Content-Type: application/json" --request POST --data '{ "pipeline": {"name":"test","jobs":[{"name":"test","steps":["test","test2"]}]}' --url "http://localhost:11000/v1/pipelines"
+```
+
+Example response:
+
+```json
+{
+   "meta":{
+      "ipAddr":"127.0.0.1",
+      "ipAddrKind":"remote",
+      "requestId":"ae429023-e070-433b-846c-47cf8a209b42",
+      "traceId":"893bf1648d88427b14a9ebd8f8f73437",
+      "userAgent":"IDP-ruby-client/1.0 HTTP/1.0"
+   },
+   "pipeline":{
+      "id":1,
+      "name":"test",
+      "jobs":[
+         {
+            "name":"test",
+            "steps":[
+               "test",
+               "test2"
+            ]
+         }
+      ]
+   }
+}
+```
 
 ## Health
 
@@ -32,19 +70,13 @@ health:
   timeout: 1s (when we should timeout the check)
 ```
 
-## Deployment
-
-Since we are advocating building microservices, you would normally use a [container orchestration system](https://newrelic.com/blog/best-practices/container-orchestration-explained). Here is what we recommend when using this system:
-- You could have a global migration service or shard these services per [bounded context](https://martinfowler.com/bliki/BoundedContext.html).
-- The client should be used as an [init container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/).
-
 ## Design
 
 Add anything interesting about the design.
 
 ## Other Systems
 
-Describe any other similar systems you took inspiration from.
+Check out the available [tooling](https://internaldeveloperplatform.org/platform-tooling/).
 
 ## Development
 
