@@ -5,6 +5,9 @@ import (
 )
 
 var (
+	// ErrPipelineNotFound for pipeline.
+	ErrPipelineNotFound = errors.New("pipeline not found")
+
 	// ErrInvalidPipelineName for pipeline.
 	ErrInvalidPipelineName = errors.New("invalid pipeline name")
 
@@ -16,11 +19,22 @@ var (
 
 	// ErrMissingSteps for pipeline.
 	ErrMissingSteps = errors.New("missing steps")
+
+	// ErrInvalidID for pipeline.
+	ErrInvalidID = errors.New("invalid id")
 )
+
+// IsNotFound for pipeline.
+func IsNotFound(err error) bool {
+	return errors.Is(err, ErrPipelineNotFound)
+}
 
 // IsInvalidArgument for pipeline.
 func IsInvalidArgument(err error) bool {
-	errs := []error{ErrInvalidPipelineName, ErrMissingJobs, ErrInvalidJobName, ErrMissingSteps}
+	errs := []error{
+		ErrInvalidPipelineName, ErrMissingJobs,
+		ErrInvalidJobName, ErrMissingSteps, ErrInvalidID,
+	}
 
 	for _, e := range errs {
 		if errors.Is(err, e) {

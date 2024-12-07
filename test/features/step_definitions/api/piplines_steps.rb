@@ -51,6 +51,42 @@ When('we try to create a pipeline with being authorized') do
   @response = Idpd::V1.server.create_pipeline(pipeline, opts)
 end
 
+When('we get the created simple pipeline') do
+  opts = {
+    headers: {
+      request_id: SecureRandom.uuid, user_agent: 'IDP-ruby-client/1.0 HTTP/1.0',
+      content_type: :json, accept: :json
+    }.merge(Idpd.token),
+    read_timeout: 10, open_timeout: 10
+  }
+
+  @response = Idpd::V1.server.get_pipeline(2, opts)
+end
+
+When('we get an nonexistent pipeline') do
+  opts = {
+    headers: {
+      request_id: SecureRandom.uuid, user_agent: 'IDP-ruby-client/1.0 HTTP/1.0',
+      content_type: :json, accept: :json
+    }.merge(Idpd.token),
+    read_timeout: 10, open_timeout: 10
+  }
+
+  @response = Idpd::V1.server.get_pipeline(10, opts)
+end
+
+When('we get an invalid pipeline') do
+  opts = {
+    headers: {
+      request_id: SecureRandom.uuid, user_agent: 'IDP-ruby-client/1.0 HTTP/1.0',
+      content_type: :json, accept: :json
+    }.merge(Idpd.token),
+    read_timeout: 10, open_timeout: 10
+  }
+
+  @response = Idpd::V1.server.get_pipeline(0, opts)
+end
+
 Then('we should have a created pipeline') do
   expect(@response.code).to eq(200)
 
@@ -64,4 +100,15 @@ end
 
 Then('we should have a unauthorized request') do
   expect(@response.code).to eq(401)
+end
+
+Then('we should have a simple pipeline') do
+  expect(@response.code).to eq(200)
+
+  res = JSON.parse(@response.body)
+  expect(res['pipeline']['id']).to eq(2)
+end
+
+Then('we should have a not found request') do
+  expect(@response.code).to eq(404)
 end
