@@ -26,9 +26,26 @@ Feature: Pipelines
     Then we should have a simple pipeline
 
   Scenario: Get a nonexistent pipeline
-    When we get an nonexistent pipeline
+    When we try to get an nonexistent pipeline
     Then we should have a not found request
 
   Scenario: Get a invalid pipeline
     When we get an invalid pipeline
+    Then we should have bad request
+
+  Scenario: Update a pipeline
+    Given we create a simple pipeline
+    When we get the update the simple pipeline
+    Then we should have an updated simple pipeline
+
+  Scenario: Update a nonexistent pipeline
+    When we try to update an nonexistent pipeline
+    Then we should have a not found request
+
+  Scenario: Update an invalid pipeline
+    When we try to update an invalid pipeline
+    Then we should have bad request
+
+  Scenario: Update pipeline by invalid id
+    When we try to update with an invalid id
     Then we should have bad request

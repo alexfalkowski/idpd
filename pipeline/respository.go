@@ -12,6 +12,9 @@ type (
 
 		// Create a pipeline.
 		Create(p *Pipeline) (*Pipeline, error)
+
+		// Update a pipeline.
+		Update(id ID, p *Pipeline) (*Pipeline, error)
 	}
 
 	// InMemoryRepository for pipeline.
@@ -56,4 +59,20 @@ func (r *InMemoryRepository) Create(p *Pipeline) (*Pipeline, error) {
 	p.ID = ID(r.counter)
 
 	return p, nil
+}
+
+// Update a pipeline.
+func (r *InMemoryRepository) Update(id ID, pipeline *Pipeline) (*Pipeline, error) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	for _, p := range r.pipelines {
+		if p.ID == id {
+			p = pipeline
+
+			return p, nil
+		}
+	}
+
+	return nil, ErrPipelineNotFound
 }
