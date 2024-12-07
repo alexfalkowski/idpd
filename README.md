@@ -103,7 +103,7 @@ Example response:
 This endpoint updates a pipeline by an ID.
 
 ```plaintext
-GET /pipelines/{id}
+PUT /pipelines/{id}
 ```
 Example request:
 
