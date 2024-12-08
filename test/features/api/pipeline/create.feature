@@ -19,3 +19,7 @@ Feature: Create a pipeline
   Scenario: Create pipeline with unauthorized access
     When we try to create a pipeline with being authorized
     Then we should have a unauthorized request
+
+  Scenario: Create pipeline with a bad payload
+    When we try to create a pipeline with a bad payload
+    Then we should have bad request

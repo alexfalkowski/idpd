@@ -17,3 +17,8 @@ Feature: Update a pipeline
   Scenario: Update pipeline by invalid id
     When we try to update with an invalid id
     Then we should have bad request
+
+  Scenario: Update a pipeline with a bad payload
+    Given we create a simple pipeline
+    When we try update a pipeline with a bad payload
+    Then we should have bad request
