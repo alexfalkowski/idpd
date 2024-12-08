@@ -265,7 +265,46 @@ This project favours the [Uber Go Style Guide](https://github.com/uber-go/guide/
 
 ### Setup
 
-Check out [CI](.circleci/config.yml).
+Let's get you setup.
+
+#### Submodules
+
+We need to get the git submodules.
+
+```bash
+git submodule sync
+git submodule update --init
+```
+
+#### Application
+
+To get the application running, do the following:
+
+1. Let's get the dependencies:
+```bash
+make go-dep
+```
+2. Let's build the application:
+```bash
+make build
+```
+3. Let's run the application:
+```bash
+make run
+```
+
+#### Features
+
+If you want to run the features, do the following:
+
+1. Let's get the dependencies:
+```bash
+make ruby-dep
+```
+2. Let's run the features:
+```bash
+make features
+```
 
 ### Changes
 
