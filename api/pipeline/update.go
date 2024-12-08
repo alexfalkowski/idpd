@@ -8,6 +8,7 @@ import (
 	"github.com/alexfalkowski/go-service/net/http/content"
 	hc "github.com/alexfalkowski/go-service/net/http/context"
 	"github.com/alexfalkowski/go-service/net/http/status"
+	"github.com/alexfalkowski/idpd/pipeline"
 )
 
 type (
@@ -31,7 +32,7 @@ func (s *Service) updatePipeline(ctx context.Context) (any, error) {
 
 	p := s.toPipeline(req.Pipeline)
 	request := hc.Request(ctx)
-	id := s.service.ID(request.PathValue("id"))
+	id := pipeline.NewID(request.PathValue("id"))
 
 	p, err := s.service.Update(id, p)
 	if err != nil {

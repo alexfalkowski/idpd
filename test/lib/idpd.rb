@@ -4,7 +4,7 @@ require 'securerandom'
 require 'yaml'
 require 'base64'
 
-require 'idpd/v1/http'
+require 'idpd/http'
 
 module Idpd
   class << self
@@ -19,13 +19,9 @@ module Idpd
     def token
       Nonnative::Header.auth_bearer(Base64.decode64(File.read('secrets/token')))
     end
-  end
 
-  module V1
-    class << self
-      def server
-        @server ||= Idpd::V1::HTTP.new('http://localhost:11000')
-      end
+    def http
+      @http ||= Idpd::HTTP.new('http://localhost:11000')
     end
   end
 end
