@@ -10,7 +10,7 @@ import (
 	"github.com/alexfalkowski/go-service/sync"
 	"github.com/alexfalkowski/go-service/telemetry"
 	"github.com/alexfalkowski/go-service/transport"
-	"github.com/alexfalkowski/idpd/api"
+	api "github.com/alexfalkowski/idpd/api/pipeline"
 	"github.com/alexfalkowski/idpd/config"
 	"github.com/alexfalkowski/idpd/health"
 	"github.com/alexfalkowski/idpd/pipeline"

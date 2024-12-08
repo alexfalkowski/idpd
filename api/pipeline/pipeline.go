@@ -1,4 +1,4 @@
-package api
+package pipeline
 
 type (
 	// Job of the pipeline.
