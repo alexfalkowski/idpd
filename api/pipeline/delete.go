@@ -1,4 +1,4 @@
-package api
+package pipeline
 
 import (
 	"context"
@@ -7,22 +7,22 @@ import (
 	hc "github.com/alexfalkowski/go-service/net/http/context"
 )
 
-// GetPipelineResponse a map of meta and the pipeline.
-type GetPipelineResponse struct {
+// DeletePipelineResponse a map of meta and the updated pipeline.
+type DeletePipelineResponse struct {
 	Meta     map[string]string `json:"meta,omitempty"`
 	Pipeline *Pipeline         `json:"pipeline,omitempty"`
 }
 
-func (s *Service) getPipeline(ctx context.Context) (any, error) {
-	req := hc.Request(ctx)
-	id := s.service.ID(req.PathValue("id"))
+func (s *Service) deletePipeline(ctx context.Context) (any, error) {
+	request := hc.Request(ctx)
+	id := s.service.ID(request.PathValue("id"))
 
-	p, err := s.service.Get(id)
+	p, err := s.service.Delete(id)
 	if err != nil {
 		return nil, s.handleError(err)
 	}
 
-	res := &GetPipelineResponse{
+	res := &DeletePipelineResponse{
 		Meta:     meta.CamelStrings(ctx, ""),
 		Pipeline: s.fromPipeline(p),
 	}
