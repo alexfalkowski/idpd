@@ -14,7 +14,8 @@ type TriggerPipelineResponse struct {
 	Pipeline *Pipeline         `json:"pipeline,omitempty"`
 }
 
-func (s *Service) triggerPipeline(ctx context.Context) (any, error) {
+// TriggerPipeline for the api.
+func (s *Service) TriggerPipeline(ctx context.Context) (any, error) {
 	req := hc.Request(ctx)
 	id := pipeline.NewID(req.PathValue("id"))
 

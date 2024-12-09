@@ -10,11 +10,11 @@ import (
 
 // Register routes.
 func Register(service *Service) {
-	rest.Post("/pipelines", service.createPipeline)
-	rest.Get("/pipelines/{id}", service.getPipeline)
-	rest.Put("/pipelines/{id}", service.updatePipeline)
-	rest.Delete("/pipelines/{id}", service.deletePipeline)
-	rest.Post("/pipelines/{id}/trigger", service.triggerPipeline)
+	rest.Post("/pipelines", service.CreatePipeline)
+	rest.Get("/pipelines/{id}", service.GetPipeline)
+	rest.Put("/pipelines/{id}", service.UpdatePipeline)
+	rest.Delete("/pipelines/{id}", service.DeletePipeline)
+	rest.Post("/pipelines/{id}/trigger", service.TriggerPipeline)
 }
 
 // Service for pipeline.

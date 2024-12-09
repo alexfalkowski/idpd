@@ -24,7 +24,8 @@ type (
 	}
 )
 
-func (s *Service) updatePipeline(ctx context.Context) (any, error) {
+// UpdatePipeline for the api.
+func (s *Service) UpdatePipeline(ctx context.Context) (any, error) {
 	var req UpdatePipelineRequest
 	if err := content.Decode(ctx, &req); err != nil {
 		return nil, status.Error(http.StatusBadRequest, err.Error())

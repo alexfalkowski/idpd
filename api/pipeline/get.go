@@ -14,7 +14,8 @@ type GetPipelineResponse struct {
 	Pipeline *Pipeline         `json:"pipeline,omitempty"`
 }
 
-func (s *Service) getPipeline(ctx context.Context) (any, error) {
+// GetPipeline for the api.
+func (s *Service) GetPipeline(ctx context.Context) (any, error) {
 	req := hc.Request(ctx)
 	id := pipeline.NewID(req.PathValue("id"))
 
