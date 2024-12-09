@@ -17,12 +17,12 @@ func Register(service *Service) {
 	rest.Post("/pipelines/{id}/trigger", service.triggerPipeline)
 }
 
-// Service for v1.
+// Service for pipeline.
 type Service struct {
 	service *pipeline.Service
 }
 
-// NewService for v1.
+// NewService for pipeline.
 func NewService(service *pipeline.Service) *Service {
 	return &Service{service: service}
 }

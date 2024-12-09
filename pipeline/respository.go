@@ -22,6 +22,9 @@ type (
 	}
 
 	// InMemoryRepository for pipeline.
+	//
+	// The counter is used as a basic id generator, though an incrementing number is nit recommend as it easy to guess.
+	// The mux is to make sure we don't accidentally corrupt or increment incorrectly.
 	InMemoryRepository struct {
 		pipelines []*Pipeline
 		counter   uint64
