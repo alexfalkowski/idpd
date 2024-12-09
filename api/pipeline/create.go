@@ -22,7 +22,8 @@ type (
 	}
 )
 
-func (s *Service) createPipeline(ctx context.Context) (any, error) {
+// CreatePipeline for the api.
+func (s *Service) CreatePipeline(ctx context.Context) (any, error) {
 	var req CreatePipelineRequest
 	if err := content.Decode(ctx, &req); err != nil {
 		return nil, status.Error(http.StatusBadRequest, err.Error())
