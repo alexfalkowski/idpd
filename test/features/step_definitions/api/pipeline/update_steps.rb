@@ -42,5 +42,8 @@ Then('we should have an updated simple pipeline') do
   expect(@response.code).to eq(200)
 
   res = JSON.parse(@response.body)
-  expect(res['pipeline']['name']).to eq('update-test')
+  pipeline = res['pipeline']
+
+  expect(pipeline['name']).to eq('update-test')
+  expect(pipeline['id']).to eq(@id)
 end

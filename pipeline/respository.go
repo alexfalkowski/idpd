@@ -74,6 +74,7 @@ func (r *InMemoryRepository) Update(id ID, pipeline *Pipeline) (*Pipeline, error
 		return nil, err
 	}
 
+	pipeline.ID = id
 	r.pipelines[i] = pipeline
 
 	return pipeline, nil
