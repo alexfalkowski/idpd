@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v0.11.1](https://github.com/alexfalkowski/idpd/releases/tag/v0.11.1) - 2024-12-09
+
+- [`bc221af`](https://github.com/alexfalkowski/idpd/commit/bc221af474edd4074c00343e2ec843e85f773eee) fix(api): use pipelines (#18)
+- [`4bd4a3b`](https://github.com/alexfalkowski/idpd/commit/4bd4a3bd83ca17b9ed00b19a7e8c8badc0ad37ec) build(docs): add setup (#17)
+
 ## [v0.11.0](https://github.com/alexfalkowski/idpd/releases/tag/v0.11.0) - 2024-12-08
 
 - [`5353d09`](https://github.com/alexfalkowski/idpd/commit/5353d0914ec66378830a508fb2e7dc0c5bf0fc56) feat(api): trigger a pipeline (#16)
