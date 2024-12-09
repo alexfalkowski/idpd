@@ -2,18 +2,9 @@ environment: development
 health:
   duration: 1s
   timeout: 1s
-limiter:
-  kind: user-agent
-  tokens: 1000
-  interval: 1s
 telemetry:
   logger:
     level: debug
-  metrics:
-    kind: prometheus
-  tracer:
-    kind: otlp
-    url: http://localhost:4318/v1/traces
 token:
   kind: key
   key: secrets/token
