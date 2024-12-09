@@ -18,6 +18,14 @@ The server is composed of [RESTful](https://aws.amazon.com/what-is/restful-api/)
 
 Each of the endpoints is documented using the following [style guide](https://docs.gitlab.com/ee/development/documentation/restful_api_styleguide.html).
 
+### Token
+
+Set the token to be reused.
+
+```shell
+token=$(cat test/secrets/token| base64 -d)
+```
+
 ### Create a pipeline
 
 This endpoint takes pipeline definition and persists it.
@@ -28,7 +36,7 @@ POST /pipelines
 Example request:
 
 ```shell
-curl --header "Authorization: Bearer <token>"  --header "Content-Type: application/json" --request POST --data '{ "pipeline": {"name":"test","jobs":[{"name":"test","steps":["test","test2"]}]}' --url "http://localhost:11000/pipelines"
+curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request POST --data '{ "pipeline": {"name":"test","jobs":[{"name":"test","steps":["test","test2"]}]}' --url "http://localhost:11000/pipelines"
 ```
 
 Example response:
@@ -68,7 +76,7 @@ GET /pipelines/{id}
 Example request:
 
 ```shell
-curl --header "Authorization: Bearer <token>"  --header "Content-Type: application/json" --request GET --url "http://localhost:11000/pipelines/1"
+curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request GET --url "http://localhost:11000/pipelines/1"
 ```
 
 Example response:
@@ -108,7 +116,7 @@ PUT /pipelines/{id}
 Example request:
 
 ```shell
-curl --header "Authorization: Bearer <token>"  --header "Content-Type: application/json" --request PUT --data '{ "pipeline": {"name":"test","jobs":[{"name":"test","steps":["test","test2"]}]}' --url "http://localhost:11000/pipelines/1"
+curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request PUT --data '{ "pipeline": {"name":"test","jobs":[{"name":"test","steps":["test","test2"]}]}' --url "http://localhost:11000/pipelines/1"
 
 Example response:
 
@@ -147,7 +155,7 @@ DELETE /pipelines/{id}
 Example request:
 
 ```shell
-curl --header "Authorization: Bearer <token>"  --header "Content-Type: application/json" --request DELETE --url "http://localhost:11000/pipelines/1"
+curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request DELETE --url "http://localhost:11000/pipelines/1"
 
 Example response:
 
@@ -186,7 +194,7 @@ POST /pipelines/{id}/triggers
 Example request:
 
 ```shell
-curl --header "Authorization: Bearer <token>"  --header "Content-Type: application/json" --request POST --url "http://localhost:11000/pipelines/1/triger"
+curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request POST --url "http://localhost:11000/pipelines/1/triger"
 
 Example response:
 
@@ -271,7 +279,7 @@ Let's get you setup.
 
 We need to get the git submodules.
 
-```bash
+```shell
 git submodule sync
 git submodule update --init
 ```
@@ -281,15 +289,15 @@ git submodule update --init
 To get the application running, do the following:
 
 1. Let's get the dependencies:
-```bash
+```shell
 make go-dep
 ```
 2. Let's build the application:
-```bash
+```shell
 make build
 ```
 3. Let's run the application:
-```bash
+```shell
 make run
 ```
 
@@ -298,11 +306,11 @@ make run
 If you want to run the features, do the following:
 
 1. Let's get the dependencies:
-```bash
+```shell
 make ruby-dep
 ```
 2. Let's run the features:
-```bash
+```shell
 make features
 ```
 
