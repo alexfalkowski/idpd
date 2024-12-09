@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v0.14.0](https://github.com/alexfalkowski/idpd/releases/tag/v0.14.0) - 2024-12-09
+
+- [`01f50c9`](https://github.com/alexfalkowski/idpd/commit/01f50c9f81c4acbc3c7ed0b7698008b44f469619) feat(api): expose functions (#27)
+- [`793baf5`](https://github.com/alexfalkowski/idpd/commit/793baf591c63033c2360ef561f111b743238c427) docs(pipeline): add assumptions (#26)
+- [`e95835b`](https://github.com/alexfalkowski/idpd/commit/e95835b590fdafeadf7d5ecef3a5c4529e830e34) docs(api): add package (#25)
+
 ## [v0.13.0](https://github.com/alexfalkowski/idpd/releases/tag/v0.13.0) - 2024-12-09
 
 - [`77a63a7`](https://github.com/alexfalkowski/idpd/commit/77a63a7d8234626ce14a9657c9a36633d827a09f) feat(config): remove checks (#24)
