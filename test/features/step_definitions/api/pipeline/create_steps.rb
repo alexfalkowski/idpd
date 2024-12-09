@@ -5,7 +5,7 @@ Given('we create an invalid pipeline') do
     pipeline: { 'name' => 'test', 'jobs' => [{ 'name' => 'test', 'steps' => ['hellos "1"', 'echo "2"'] }] }
   }
 
-  @response = Idpd.http.create_pipeline(pipeline.to_json, opts)
+  @response = Idpd.http.create_pipeline(pipeline.to_json, Idpd.options)
 end
 
 When('we create a simple pipeline') do
@@ -13,7 +13,7 @@ When('we create a simple pipeline') do
     pipeline: { 'name' => 'test', 'jobs' => [{ 'name' => 'test', 'steps' => ['echo "1"', 'echo "2"'] }] }
   }
 
-  @response = Idpd.http.create_pipeline(pipeline.to_json, opts)
+  @response = Idpd.http.create_pipeline(pipeline.to_json, Idpd.options)
 end
 
 When('we try to create a invalid pipeline of kind {string}') do |kind|
@@ -24,7 +24,7 @@ When('we try to create a invalid pipeline of kind {string}') do |kind|
     'missing steps' => { pipeline: { 'name' => 'test', 'jobs' => [{ 'name' => 'test' }] } }
   }
 
-  @response = Idpd.http.create_pipeline(cases[kind].to_json, opts)
+  @response = Idpd.http.create_pipeline(cases[kind].to_json, Idpd.options)
 end
 
 When('we try to create a pipeline with being authorized') do
@@ -44,7 +44,7 @@ When('we try to create a pipeline with being authorized') do
 end
 
 When('we try to create a pipeline with a bad payload') do
-  @response = Idpd.http.create_pipeline(Base64.encode64('test'), opts)
+  @response = Idpd.http.create_pipeline(Base64.encode64('test'), Idpd.options)
 end
 
 Then('we should have a created pipeline') do
