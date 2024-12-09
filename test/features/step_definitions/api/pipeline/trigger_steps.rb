@@ -2,15 +2,15 @@
 
 When('we trigger the simple pipeline') do
   @id = JSON.parse(@response.body)['pipeline']['id'].to_i
-  @response = Idpd.http.trigger_pipeline(@id, opts)
+  @response = Idpd.http.trigger_pipeline(@id, Idpd.options)
 end
 
 When('we try to trigger an nonexistent pipeline') do
-  @response = Idpd.http.trigger_pipeline(10, opts)
+  @response = Idpd.http.trigger_pipeline(10, Idpd.options)
 end
 
 When('we try to trigger with an invalid id') do
-  @response = Idpd.http.trigger_pipeline(0, opts)
+  @response = Idpd.http.trigger_pipeline(0, Idpd.options)
 end
 
 Then('we should receive the output of simple pipeline') do
