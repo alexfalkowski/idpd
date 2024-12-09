@@ -18,6 +18,8 @@ func Register(service *Service) {
 }
 
 // Service for pipeline.
+//
+// This type is the main type that builds all of the api.
 type Service struct {
 	service *pipeline.Service
 }
@@ -27,6 +29,7 @@ func NewService(service *pipeline.Service) *Service {
 	return &Service{service: service}
 }
 
+// fromPipeline converts api pipeline to domain pipeline.
 func (s *Service) toPipeline(pl *Pipeline) *pipeline.Pipeline {
 	p := &pipeline.Pipeline{
 		Name: pl.Name,
@@ -49,6 +52,7 @@ func (s *Service) toPipeline(pl *Pipeline) *pipeline.Pipeline {
 	return p
 }
 
+// fromPipeline converts domain pipeline to api pipeline.
 func (s *Service) fromPipeline(pl *pipeline.Pipeline) *Pipeline {
 	p := &Pipeline{
 		Name: pl.Name,
@@ -71,6 +75,7 @@ func (s *Service) fromPipeline(pl *pipeline.Pipeline) *Pipeline {
 	return p
 }
 
+// handleError maps from domain errors to api errors.
 func (s *Service) handleError(err error) error {
 	if pipeline.IsInvalidArgument(err) {
 		return status.Error(http.StatusBadRequest, err.Error())

@@ -47,12 +47,18 @@ func IsInvalidArgument(err error) bool {
 
 type (
 	// Job of the pipeline.
+	//
+	// Each job just has a list of commands that will run on the host.
+	// A good job definition would have some sort of workflow definition to allow different patterns.
+	// An example can be found at https://circleci.com/docs/workflows/
 	Job struct {
 		Name  string
 		Steps []string
 	}
 
 	// Pipeline to be executed.
+	//
+	// A pipeline has a list of jobs.
 	Pipeline struct {
 		Name string
 		Jobs []*Job
@@ -60,7 +66,7 @@ type (
 	}
 )
 
-// Valid job or error.
+// Valid job or error if name is blank or empty steps.
 func (j *Job) Valid() error {
 	if j.Name == "" {
 		return ErrInvalidJobName
@@ -73,7 +79,7 @@ func (j *Job) Valid() error {
 	return nil
 }
 
-// Valid pipeline or error.
+// Valid pipeline or error if name is blank, empty jobs or invalid jobs.
 func (p *Pipeline) Valid() error {
 	if p.Name == "" {
 		return ErrInvalidPipelineName

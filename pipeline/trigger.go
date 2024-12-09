@@ -6,6 +6,8 @@ import (
 )
 
 // Update an existing pipeline.
+//
+// This assumes that we will just run each job and each step serially. The first error we exit.
 func (s *Service) Trigger(ctx context.Context, id ID) (*Pipeline, error) {
 	if err := id.Valid(); err != nil {
 		return nil, err
