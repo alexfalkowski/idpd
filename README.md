@@ -26,6 +26,10 @@ Set the token to be reused.
 token=$(cat test/secrets/token| base64 -d)
 ```
 
+### Pipeline
+
+We have a pipeline that we can use for testing, it is located [here](test/pipeline).
+
 ### Create a pipeline
 
 This endpoint takes pipeline definition and persists it.
@@ -36,7 +40,7 @@ POST /pipelines
 Example request:
 
 ```shell
-curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request POST --data '{ "pipeline": {"name":"test","jobs":[{"name":"test","steps":["test","test2"]}]}' --url "http://localhost:11000/pipelines"
+curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request POST --data @test/pipeline --url "http://localhost:11000/pipelines"
 ```
 
 Example response:
@@ -116,7 +120,8 @@ PUT /pipelines/{id}
 Example request:
 
 ```shell
-curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request PUT --data '{ "pipeline": {"name":"test","jobs":[{"name":"test","steps":["test","test2"]}]}' --url "http://localhost:11000/pipelines/1"
+curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request PUT --data @test/pipeline --url "http://localhost:11000/pipelines/1"
+```
 
 Example response:
 
@@ -156,6 +161,7 @@ Example request:
 
 ```shell
 curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request DELETE --url "http://localhost:11000/pipelines/1"
+```
 
 Example response:
 

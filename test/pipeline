@@ -1,0 +1,14 @@
+{
+  "pipeline": {
+    "name": "test",
+    "jobs": [
+      {
+        "name": "test",
+        "steps": [
+          "echo 1",
+          "echo 2"
+        ]
+      }
+    ]
+  }
+}
