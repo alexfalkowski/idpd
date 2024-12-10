@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v0.16.0](https://github.com/alexfalkowski/idpd/releases/tag/v0.16.0) - 2024-12-10
+
+- [`9d5ece3`](https://github.com/alexfalkowski/idpd/commit/9d5ece383aac885a8cb00597c89b2ca61efe599e) feat(deps): update github.com/alexfalkowski/go-service to v1.329.0 (#31)
+- [`3404ba3`](https://github.com/alexfalkowski/idpd/commit/3404ba35b926d1df0bf2b1cad9dd0ab3fd815b18) build(deps): bump bin from `cf4a7d3` to `10049eb` (#30)
+- [`dbd620d`](https://github.com/alexfalkowski/idpd/commit/dbd620dfb42bb682b2df75fe4a6a06175ed32b78) docs(readme): trigger had misspelling (#29)
+
 ## [v0.15.0](https://github.com/alexfalkowski/idpd/releases/tag/v0.15.0) - 2024-12-09
 
 - [`dc7602e`](https://github.com/alexfalkowski/idpd/commit/dc7602e1a2f8b0fa6248e5db813ea7ce01a54703) feat(deps): bump github.com/alexfalkowski/go-service from 1.327.0 to 1.328.0 (#28)
