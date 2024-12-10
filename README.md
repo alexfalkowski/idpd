@@ -195,12 +195,12 @@ Example response:
 This endpoint triggers a pipeline by an ID.
 
 ```plaintext
-POST /pipelines/{id}/triggers
+POST /pipelines/{id}/trigger
 ```
 Example request:
 
 ```shell
-curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request POST --url "http://localhost:11000/pipelines/1/triger"
+curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request POST --url "http://localhost:11000/pipelines/1/trigger"
 
 Example response:
 
