@@ -56,7 +56,7 @@ func (s *Service) toPipeline(pl *Pipeline) *pipeline.Pipeline {
 func (s *Service) fromPipeline(pl *pipeline.Pipeline) *Pipeline {
 	p := &Pipeline{
 		Name: pl.Name,
-		ID:   uint64(pl.ID),
+		ID:   uint32(pl.ID),
 	}
 
 	p.Jobs = make([]*Job, len(pl.Jobs))

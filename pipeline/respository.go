@@ -5,7 +5,6 @@ import (
 	"sync"
 
 	"github.com/alexfalkowski/go-service/encoding/gob"
-	"github.com/cespare/xxhash/v2"
 	cache "github.com/elastic/go-freelru"
 )
 
@@ -32,8 +31,8 @@ type (
 	// The cache and enc are there to make sure we don't maintain pointers in memory.
 	InMemoryRepository struct {
 		enc     *gob.Encoder
-		cache   *cache.LRU[string, []byte]
-		counter uint64
+		cache   *cache.LRU[ID, []byte]
+		counter uint32
 		mu      sync.Mutex
 	}
 )
@@ -41,7 +40,7 @@ type (
 // NewRepository for pipeline.
 func NewRepository(enc *gob.Encoder) Repository {
 	// No need to check for err, as we have valid arguments.
-	c, _ := cache.New[string, []byte](1024, hash)
+	c, _ := cache.New[ID, []byte](1024, hash)
 
 	return &InMemoryRepository{enc: enc, cache: c}
 }
@@ -69,7 +68,7 @@ func (r *InMemoryRepository) Create(p *Pipeline) (*Pipeline, error) {
 		return nil, err
 	}
 
-	r.cache.Add(id.String(), b.Bytes())
+	r.cache.Add(id, b.Bytes())
 
 	return p, nil
 }
@@ -91,7 +90,7 @@ func (r *InMemoryRepository) Update(id ID, p *Pipeline) (*Pipeline, error) {
 		return nil, err
 	}
 
-	r.cache.Add(id.String(), b.Bytes())
+	r.cache.Add(id, b.Bytes())
 
 	return p, nil
 }
@@ -106,13 +105,13 @@ func (r *InMemoryRepository) Delete(id ID) (*Pipeline, error) {
 		return nil, err
 	}
 
-	r.cache.Remove(id.String())
+	r.cache.Remove(id)
 
 	return p, nil
 }
 
 func (r *InMemoryRepository) get(id ID) (*Pipeline, error) {
-	b, ok := r.cache.Get(id.String())
+	b, ok := r.cache.Get(id)
 	if !ok {
 		return nil, ErrPipelineNotFound
 	}
@@ -125,7 +124,6 @@ func (r *InMemoryRepository) get(id ID) (*Pipeline, error) {
 	return &p, nil
 }
 
-//nolint:gosec
-func hash(s string) uint32 {
-	return uint32(xxhash.Sum64String(s))
+func hash(id ID) uint32 {
+	return uint32(id)
 }
