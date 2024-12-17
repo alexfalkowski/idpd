@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v0.22.2](https://github.com/alexfalkowski/idpd/releases/tag/v0.22.2) - 2024-12-17
+
+- [`5305604`](https://github.com/alexfalkowski/idpd/commit/53056041bbe986dbf84901b5935e7b8b127be6b5) fix(pipeline): no need to hash (#40)
+
 ## [v0.22.1](https://github.com/alexfalkowski/idpd/releases/tag/v0.22.1) - 2024-12-17
 
 - [`19152c3`](https://github.com/alexfalkowski/idpd/commit/19152c380d81bcfb35cb0a40d68e0cbf73b71529) fix(pipeline): use a cache (#39)
