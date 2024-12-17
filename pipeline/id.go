@@ -26,3 +26,8 @@ func (i ID) Valid() error {
 
 	return nil
 }
+
+// String of the ID.
+func (i ID) String() string {
+	return strconv.FormatUint(uint64(i), 10)
+}
