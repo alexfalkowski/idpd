@@ -47,6 +47,10 @@ When('we try to create a pipeline with a bad payload') do
   @response = Idpd.http.create_pipeline(Base64.encode64('test'), Idpd.options)
 end
 
+When('we try to create a pipeline with an empty payload') do
+  @response = Idpd.http.create_pipeline('{}', Idpd.options)
+end
+
 Then('we should have a created pipeline') do
   expect(@response.code).to eq(200)
 

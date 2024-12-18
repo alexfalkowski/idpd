@@ -1,5 +1,12 @@
 package pipeline
 
+import (
+	"errors"
+)
+
+// ErrMissingPipeline when the payload is invalid.
+var ErrMissingPipeline = errors.New("missing pipeline")
+
 type (
 	// Job of the pipeline.
 	Job struct {

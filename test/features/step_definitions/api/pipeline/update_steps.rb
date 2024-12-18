@@ -38,6 +38,11 @@ When('we try update a pipeline with a bad payload') do
   @response = Idpd.http.update_pipeline(@id, Base64.encode64('test'), Idpd.options)
 end
 
+When('we try update a pipeline with an empty payload') do
+  @id = JSON.parse(@response.body)['pipeline']['id'].to_i
+  @response = Idpd.http.update_pipeline(@id, '{}', Idpd.options)
+end
+
 Then('we should have an updated simple pipeline') do
   expect(@response.code).to eq(200)
 

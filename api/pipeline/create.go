@@ -22,10 +22,23 @@ type (
 	}
 )
 
+// Valid returns an error if we have missing pipeline.
+func (c *CreatePipelineRequest) Valid() error {
+	if c.Pipeline == nil {
+		return ErrMissingPipeline
+	}
+
+	return nil
+}
+
 // CreatePipeline for the api.
 func (s *Service) CreatePipeline(ctx context.Context) (any, error) {
 	var req CreatePipelineRequest
 	if err := content.Decode(ctx, &req); err != nil {
+		return nil, status.Error(http.StatusBadRequest, err.Error())
+	}
+
+	if err := req.Valid(); err != nil {
 		return nil, status.Error(http.StatusBadRequest, err.Error())
 	}
 
