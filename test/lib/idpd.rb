@@ -8,12 +8,8 @@ require 'idpd/http'
 
 module Idpd
   class << self
-    def observability
-      @observability ||= Nonnative::Observability.new('http://localhost:11000')
-    end
-
-    def server_config
-      @server_config ||= Nonnative.configurations('.config/server.yml')
+    def config
+      @config ||= Nonnative.configurations('.config/server.yml')
     end
 
     def token
@@ -21,7 +17,7 @@ module Idpd
     end
 
     def http
-      @http ||= Idpd::HTTP.new('http://localhost:11000')
+      @http ||= Idpd::HTTP.new(Nonnative.configuration.url)
     end
 
     def options
