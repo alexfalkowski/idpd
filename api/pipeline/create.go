@@ -7,6 +7,7 @@ import (
 	"github.com/alexfalkowski/go-service/meta"
 	"github.com/alexfalkowski/go-service/net/http/content"
 	"github.com/alexfalkowski/go-service/net/http/status"
+	"github.com/alexfalkowski/go-service/structs"
 )
 
 type (
@@ -24,7 +25,7 @@ type (
 
 // Valid returns an error if we have missing pipeline.
 func (c *CreatePipelineRequest) Valid() error {
-	if c.Pipeline == nil {
+	if structs.IsZero(c) {
 		return ErrMissingPipeline
 	}
 
