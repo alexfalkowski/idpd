@@ -22,3 +22,8 @@ Feature: Update a pipeline
     Given we create a simple pipeline
     When we try update a pipeline with a bad payload
     Then we should have bad request
+
+  Scenario: Update a pipeline with a empty payload
+    Given we create a simple pipeline
+    When we try update a pipeline with an empty payload
+    Then we should have bad request

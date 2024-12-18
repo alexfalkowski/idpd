@@ -23,3 +23,7 @@ Feature: Create a pipeline
   Scenario: Create pipeline with a bad payload
     When we try to create a pipeline with a bad payload
     Then we should have bad request
+
+  Scenario: Create pipeline with a empty payload
+    When we try to create a pipeline with an empty payload
+    Then we should have bad request
