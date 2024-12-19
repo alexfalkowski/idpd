@@ -55,7 +55,7 @@ Example response:
       "userAgent":"IDP-ruby-client/1.0 HTTP/1.0"
    },
    "pipeline":{
-      "id":1,
+      "id":"123456",
       "name":"test",
       "jobs":[
          {
@@ -80,7 +80,7 @@ GET /pipelines/{id}
 Example request:
 
 ```shell
-curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request GET --url "http://localhost:11000/pipelines/1"
+curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request GET --url "http://localhost:11000/pipelines/123456"
 ```
 
 Example response:
@@ -95,7 +95,7 @@ Example response:
       "userAgent":"IDP-ruby-client/1.0 HTTP/1.0"
    },
    "pipeline":{
-      "id":1,
+      "id":"123456",
       "name":"test",
       "jobs":[
          {
@@ -120,7 +120,7 @@ PUT /pipelines/{id}
 Example request:
 
 ```shell
-curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request PUT --data @test/pipeline --url "http://localhost:11000/pipelines/1"
+curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request PUT --data @test/pipeline --url "http://localhost:11000/pipelines/123456"
 ```
 
 Example response:
@@ -135,7 +135,7 @@ Example response:
       "userAgent":"IDP-ruby-client/1.0 HTTP/1.0"
    },
    "pipeline":{
-      "id":1,
+      "id":"123456",
       "name":"test",
       "jobs":[
          {
@@ -160,7 +160,7 @@ DELETE /pipelines/{id}
 Example request:
 
 ```shell
-curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request DELETE --url "http://localhost:11000/pipelines/1"
+curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request DELETE --url "http://localhost:11000/pipelines/123456"
 ```
 
 Example response:
@@ -175,7 +175,7 @@ Example response:
       "userAgent":"IDP-ruby-client/1.0 HTTP/1.0"
    },
    "pipeline":{
-      "id":1,
+      "id":"123456",
       "name":"test",
       "jobs":[
          {
@@ -200,7 +200,8 @@ POST /pipelines/{id}/trigger
 Example request:
 
 ```shell
-curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request POST --url "http://localhost:11000/pipelines/1/trigger"
+curl --header "Authorization: Bearer $token"  --header "Content-Type: application/json" --request POST --url "http://localhost:11000/pipelines/123456/trigger"
+```
 
 Example response:
 
@@ -214,7 +215,7 @@ Example response:
       "userAgent":"IDP-ruby-client/1.0 HTTP/1.0"
    },
    "pipeline":{
-      "id":1,
+      "id":"123456",
       "name":"test",
       "jobs":[
          {
