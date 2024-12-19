@@ -2,8 +2,10 @@ package pipeline
 
 import (
 	"bytes"
+	"hash/fnv"
 	"sync"
 
+	"github.com/alexfalkowski/go-service/crypto/rand"
 	"github.com/alexfalkowski/go-service/encoding/gob"
 	cache "github.com/elastic/go-freelru"
 )
@@ -26,14 +28,12 @@ type (
 
 	// InMemoryRepository for pipeline.
 	//
-	// The counter is used as a basic id generator, though an incrementing number is nit recommend as it easy to guess.
-	// The mux is to make sure we don't accidentally corrupt or increment incorrectly.
+	// The mux is to make sure we don't accidentally corrupt.
 	// The cache and enc are there to make sure we don't maintain pointers in memory.
 	InMemoryRepository struct {
-		enc     *gob.Encoder
-		cache   *cache.LRU[ID, []byte]
-		counter uint32
-		mu      sync.Mutex
+		enc   *gob.Encoder
+		cache *cache.LRU[ID, []byte]
+		mu    sync.Mutex
 	}
 )
 
@@ -58,8 +58,10 @@ func (r *InMemoryRepository) Create(p *Pipeline) (*Pipeline, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	r.counter++
-	id := ID(r.counter)
+	id, err := r.generateID()
+	if err != nil {
+		return nil, err
+	}
 
 	p.ID = id
 
@@ -78,9 +80,9 @@ func (r *InMemoryRepository) Update(id ID, p *Pipeline) (*Pipeline, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	_, err := r.get(id)
-	if err != nil {
-		return nil, err
+	_, ok := r.cache.Get(id)
+	if !ok {
+		return nil, ErrPipelineNotFound
 	}
 
 	p.ID = id
@@ -124,6 +126,18 @@ func (r *InMemoryRepository) get(id ID) (*Pipeline, error) {
 	return &p, nil
 }
 
+func (r *InMemoryRepository) generateID() (ID, error) {
+	id, err := rand.GenerateLetters(6)
+	if err != nil {
+		return "", err
+	}
+
+	return ID(id), nil
+}
+
 func hash(id ID) uint32 {
-	return uint32(id)
+	h := fnv.New32a()
+	h.Write([]byte(id))
+
+	return h.Sum32()
 }

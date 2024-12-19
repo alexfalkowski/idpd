@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 When('we delete the simple pipeline') do
-  @id = JSON.parse(@response.body)['pipeline']['id'].to_i
+  @id = JSON.parse(@response.body)['pipeline']['id']
   @response = Idpd.http.delete_pipeline(@id, Idpd.options)
 end
 
 When('we try to delete an nonexistent pipeline') do
-  @response = Idpd.http.delete_pipeline(10, Idpd.options)
+  @response = Idpd.http.delete_pipeline('123456', Idpd.options)
 end
 
 When('we try to delete with an invalid id') do

@@ -18,6 +18,6 @@ type (
 	Pipeline struct {
 		Name string `json:"name,omitempty"`
 		Jobs []*Job `json:"jobs,omitempty"`
-		ID   uint32 `json:"id,omitempty"`
+		ID   string `json:"id,omitempty"`
 	}
 )

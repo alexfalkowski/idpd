@@ -5,7 +5,7 @@ When('we try to update an nonexistent pipeline') do
     pipeline: { 'name' => 'update-test', 'jobs' => [{ 'name' => 'test', 'steps' => %w[test test2] }] }
   }
 
-  @response = Idpd.http.update_pipeline(10, pipeline.to_json, Idpd.options)
+  @response = Idpd.http.update_pipeline('123456', pipeline.to_json, Idpd.options)
 end
 
 When('we try to update an invalid pipeline') do
@@ -29,17 +29,17 @@ When('we update the simple pipeline') do
     pipeline: { 'name' => 'update-test', 'jobs' => [{ 'name' => 'test', 'steps' => %w[test test2] }] }
   }
 
-  @id = JSON.parse(@response.body)['pipeline']['id'].to_i
+  @id = JSON.parse(@response.body)['pipeline']['id']
   @response = Idpd.http.update_pipeline(@id, pipeline.to_json, Idpd.options)
 end
 
 When('we try update a pipeline with a bad payload') do
-  @id = JSON.parse(@response.body)['pipeline']['id'].to_i
+  @id = JSON.parse(@response.body)['pipeline']['id']
   @response = Idpd.http.update_pipeline(@id, Base64.encode64('test'), Idpd.options)
 end
 
 When('we try update a pipeline with an empty payload') do
-  @id = JSON.parse(@response.body)['pipeline']['id'].to_i
+  @id = JSON.parse(@response.body)['pipeline']['id']
   @response = Idpd.http.update_pipeline(@id, '{}', Idpd.options)
 end
 
