@@ -17,7 +17,7 @@ type (
 	// Pipeline to be executed.
 	Pipeline struct {
 		Name string `json:"name,omitempty"`
+		ID   string `json:"id,omitempty"`
 		Jobs []*Job `json:"jobs,omitempty"`
-		ID   uint32 `json:"id,omitempty"`
 	}
 )

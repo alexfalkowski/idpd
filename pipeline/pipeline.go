@@ -61,8 +61,8 @@ type (
 	// A pipeline has a list of jobs.
 	Pipeline struct {
 		Name string
-		Jobs []*Job
 		ID   ID
+		Jobs []*Job
 	}
 )
 

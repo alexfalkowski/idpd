@@ -55,7 +55,7 @@ Then('we should have a created pipeline') do
   expect(@response.code).to eq(200)
 
   res = JSON.parse(@response.body)
-  expect(res['pipeline']['id']).to eq(1)
+  expect(res['pipeline']['id'].length).to eq(6)
 end
 
 Then('we should have bad request') do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 When('we try to get an nonexistent pipeline') do
-  @response = Idpd.http.get_pipeline(10, Idpd.options)
+  @response = Idpd.http.get_pipeline('123456', Idpd.options)
 end
 
 When('we get an invalid pipeline') do
@@ -9,7 +9,7 @@ When('we get an invalid pipeline') do
 end
 
 When('we get the created simple pipeline') do
-  @id = JSON.parse(@response.body)['pipeline']['id'].to_i
+  @id = JSON.parse(@response.body)['pipeline']['id']
   @response = Idpd.http.get_pipeline(@id, Idpd.options)
 end
 
