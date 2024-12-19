@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 When('we trigger the simple pipeline') do
-  @id = JSON.parse(@response.body)['pipeline']['id'].to_i
+  @id = JSON.parse(@response.body)['pipeline']['id']
   @response = Idpd.http.trigger_pipeline(@id, Idpd.options)
 end
 
 When('we try to trigger an nonexistent pipeline') do
-  @response = Idpd.http.trigger_pipeline(10, Idpd.options)
+  @response = Idpd.http.trigger_pipeline('123456', Idpd.options)
 end
 
 When('we try to trigger with an invalid id') do

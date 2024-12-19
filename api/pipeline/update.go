@@ -47,7 +47,7 @@ func (s *Service) UpdatePipeline(ctx context.Context) (any, error) {
 
 	p := s.toPipeline(req.Pipeline)
 	request := hc.Request(ctx)
-	id := pipeline.NewID(request.PathValue("id"))
+	id := pipeline.ID(request.PathValue("id"))
 
 	p, err := s.service.Update(id, p)
 	if err != nil {
