@@ -14,7 +14,7 @@ func Register(service *Service) {
 	rest.Get("/pipelines/{id}", service.GetPipeline)
 	rest.Put("/pipelines/{id}", service.UpdatePipeline)
 	rest.Delete("/pipelines/{id}", service.DeletePipeline)
-	rest.Post("/pipelines/{id}/trigger", service.TriggerPipeline)
+	rest.Route("POST /pipelines/{id}/trigger", service.TriggerPipeline)
 }
 
 // Service for pipeline.

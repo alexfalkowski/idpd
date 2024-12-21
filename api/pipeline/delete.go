@@ -15,7 +15,7 @@ type DeletePipelineResponse struct {
 }
 
 // DeletePipeline for the api.
-func (s *Service) DeletePipeline(ctx context.Context) (any, error) {
+func (s *Service) DeletePipeline(ctx context.Context) (*DeletePipelineResponse, error) {
 	req := hc.Request(ctx)
 	id := pipeline.ID(req.PathValue("id"))
 

@@ -15,7 +15,7 @@ type TriggerPipelineResponse struct {
 }
 
 // TriggerPipeline for the api.
-func (s *Service) TriggerPipeline(ctx context.Context) (any, error) {
+func (s *Service) TriggerPipeline(ctx context.Context) (*TriggerPipelineResponse, error) {
 	req := hc.Request(ctx)
 	id := pipeline.ID(req.PathValue("id"))
 
