@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/alexfalkowski/go-service/meta"
-	"github.com/alexfalkowski/go-service/net/http/content"
 	hc "github.com/alexfalkowski/go-service/net/http/context"
 	"github.com/alexfalkowski/go-service/net/http/status"
 	"github.com/alexfalkowski/go-service/structs"
@@ -35,12 +34,7 @@ func (u *UpdatePipelineRequest) Valid() error {
 }
 
 // UpdatePipeline for the api.
-func (s *Service) UpdatePipeline(ctx context.Context) (any, error) {
-	var req UpdatePipelineRequest
-	if err := content.Decode(ctx, &req); err != nil {
-		return nil, status.Error(http.StatusBadRequest, err.Error())
-	}
-
+func (s *Service) UpdatePipeline(ctx context.Context, req *UpdatePipelineRequest) (*UpdatePipelineResponse, error) {
 	if err := req.Valid(); err != nil {
 		return nil, status.Error(http.StatusBadRequest, err.Error())
 	}
@@ -54,7 +48,7 @@ func (s *Service) UpdatePipeline(ctx context.Context) (any, error) {
 		return nil, s.handleError(err)
 	}
 
-	res := &CreatePipelineResponse{
+	res := &UpdatePipelineResponse{
 		Meta:     meta.CamelStrings(ctx, ""),
 		Pipeline: s.fromPipeline(p),
 	}

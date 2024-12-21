@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/alexfalkowski/go-service/meta"
-	"github.com/alexfalkowski/go-service/net/http/content"
 	"github.com/alexfalkowski/go-service/net/http/status"
 	"github.com/alexfalkowski/go-service/structs"
 )
@@ -33,12 +32,7 @@ func (c *CreatePipelineRequest) Valid() error {
 }
 
 // CreatePipeline for the api.
-func (s *Service) CreatePipeline(ctx context.Context) (any, error) {
-	var req CreatePipelineRequest
-	if err := content.Decode(ctx, &req); err != nil {
-		return nil, status.Error(http.StatusBadRequest, err.Error())
-	}
-
+func (s *Service) CreatePipeline(ctx context.Context, req *CreatePipelineRequest) (*CreatePipelineResponse, error) {
 	if err := req.Valid(); err != nil {
 		return nil, status.Error(http.StatusBadRequest, err.Error())
 	}
