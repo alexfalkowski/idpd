@@ -19,8 +19,8 @@ type (
 
 	// UpdatePipelineResponse a map of meta and the updated pipeline.
 	UpdatePipelineResponse struct {
-		Meta     map[string]string `json:"meta,omitempty"`
-		Pipeline *Pipeline         `json:"pipeline,omitempty"`
+		Meta     meta.Map  `json:"meta,omitempty"`
+		Pipeline *Pipeline `json:"pipeline,omitempty"`
 	}
 )
 

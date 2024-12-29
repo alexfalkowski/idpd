@@ -17,8 +17,8 @@ type (
 
 	// CreatePipelineResponse a map of meta and the new pipeline.
 	CreatePipelineResponse struct {
-		Meta     map[string]string `json:"meta,omitempty"`
-		Pipeline *Pipeline         `json:"pipeline,omitempty"`
+		Meta     meta.Map  `json:"meta,omitempty"`
+		Pipeline *Pipeline `json:"pipeline,omitempty"`
 	}
 )
 

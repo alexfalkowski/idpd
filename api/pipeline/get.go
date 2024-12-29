@@ -10,8 +10,8 @@ import (
 
 // GetPipelineResponse a map of meta and the pipeline.
 type GetPipelineResponse struct {
-	Meta     map[string]string `json:"meta,omitempty"`
-	Pipeline *Pipeline         `json:"pipeline,omitempty"`
+	Meta     meta.Map  `json:"meta,omitempty"`
+	Pipeline *Pipeline `json:"pipeline,omitempty"`
 }
 
 // GetPipeline for the api.

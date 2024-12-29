@@ -10,8 +10,8 @@ import (
 
 // TriggerPipelineResponse a map of meta and the pipeline with the output in steps.
 type TriggerPipelineResponse struct {
-	Meta     map[string]string `json:"meta,omitempty"`
-	Pipeline *Pipeline         `json:"pipeline,omitempty"`
+	Meta     meta.Map  `json:"meta,omitempty"`
+	Pipeline *Pipeline `json:"pipeline,omitempty"`
 }
 
 // TriggerPipeline for the api.
